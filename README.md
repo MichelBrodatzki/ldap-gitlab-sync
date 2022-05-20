@@ -12,7 +12,7 @@ Es muss eine .env angelegt werden. Eine Vorlage hierfür ist .env.template.
 
 ## Nutzung
 ### Referat und GitLab-Gruppe verbinden
-Um die Verbindungen zwischen Referaten und GitLab-Gruppen zu verwalten, kann man ```poetry run refearte``` benutzen. Mit dem Flag -h wird hier die Hilfe angezeigt.
+Um die Verbindungen zwischen Referaten und GitLab-Gruppen zu verwalten, kann man ```poetry run referate``` benutzen. Mit dem Flag -h wird hier die Hilfe angezeigt.
 
 ### Synchronisierung von LDAP und GitLab
 TBA. Sollte dann aber ```poetry run sync``` werden. Und am Besten noch ein --dry-run Flag, damit man den Befehl auch testweise ausführen kann.
