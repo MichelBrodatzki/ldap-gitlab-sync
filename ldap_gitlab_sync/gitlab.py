@@ -49,17 +49,19 @@ def add_members(logger, group_path, user_list):
                     fetch_user = gl.users.list(username=user[0])
                     if len(fetch_user) == 0:
                         users[user[0]] = None
+                        logger.warning("User {} not registered in GitLab".format(user[0]))
                     elif len(fetch_user) == 1:
                         users[user[0]] = fetch_user[0]
                     else:
                         users[user[0]] = None
                         logger.warning("Multiple matches in GitLab for user {}".format(user[0]))
-                try:
-                    logger.debug("Adding {} to {}".format(user[0], group_path))
-                    group.members.create({'user_id': users[user[0]].id,
-                                      'access_level': user[1]})
-                except gitlab.GitlabCreateError:
-                    logger.warning("{} already in group {}".format(user[0], group_path))
+                if users[user[0]] is not None:
+                    try:
+                        logger.debug("Adding {} to {}".format(user[0], group_path))
+                        group.members.create({'user_id': users[user[0]].id,
+                                          'access_level': user[1]})
+                    except gitlab.GitlabCreateError:
+                        logger.warning("{} already in group {}".format(user[0], group_path))
 
 
 
