@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ldap-gitlab-sync"
-version = "1.0.0"
+version = "1.0.1"
 description = ""
 authors = ["Michel Thomas Brodatzki <michel@brodatzki.com>"]
 license = "MIT"
