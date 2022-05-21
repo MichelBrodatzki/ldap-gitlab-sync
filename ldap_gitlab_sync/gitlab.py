@@ -8,9 +8,6 @@ def fetch_groups(logger):
 
     groups = {}
 
-    if gl_url is None or gl_token is None or gl_base_group is None: 
-        raise ValueError("GitLab config variables not found. Is .env correctly configured?")
-
     logger.verbose("Connecting to GitLab ...")
     gl = gitlab.Gitlab(url=gl_url, private_token=gl_token)
     
@@ -39,13 +36,9 @@ def add_members(logger, group_path, user_list):
     logger.verbose("Adding users in {}".format(group_path))
     gl_url = getenv("GITLAB_URL")
     gl_token = getenv("GITLAB_GROUP_TOKEN")
-    gl_base_group = getenv("GITLAB_BASE_GROUP")
 
     # Users cache
     users = {}
-
-    if gl_url is None or gl_token is None or gl_base_group is None: 
-        raise ValueError("GitLab config variables not found. Is .env correctly configured?")
 
     gl = gitlab.Gitlab(url=gl_url, private_token=gl_token)
     
@@ -75,11 +68,6 @@ def remove_members(logger, group_path, user_list):
     logger.verbose("Removing users from {}".format(group_path))
     gl_url = getenv("GITLAB_URL")
     gl_token = getenv("GITLAB_GROUP_TOKEN")
-    gl_base_group = getenv("GITLAB_BASE_GROUP")
-
-
-    if gl_url is None or gl_token is None or gl_base_group is None: 
-        raise ValueError("GitLab config variables not found. Is .env correctly configured?")
 
     gl = gitlab.Gitlab(url=gl_url, private_token=gl_token)
     

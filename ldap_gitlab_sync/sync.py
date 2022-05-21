@@ -1,9 +1,16 @@
 import argparse
+import os
 from dotenv import load_dotenv
 
 from .util import Logger
 from .ldap import fetch_groups as ldap_fetch_groups
 from .gitlab import fetch_groups as gitlab_fetch_groups, add_members as gitlab_add_members, remove_members as gitlab_remove_members
+
+def check_env_vars():
+    needed_vars = ["GITLAB_URL", "GITLAB_BASE_GROUP", "GITLAB_BASE_GROUP", "LDAP_HOST", "LDAP_PORT", "LDAP_BIND_DN", "LDAP_BIND_PASSWORD", "LDAP_GROUPS_BASE", "LDAP_USERS_BASE", "SYNC_LDAP_GROUP_OBJECTCLASS", "SYNC_LDAP_GITLAB_GROUP_ATTRIBUTE", "SYNC_LDAP_USER_OBJECTCLASS", "SYNC_LDAP_GITLAB_USER_ATTRIBUTE", "SYNC_LDAP_ADMIN_GROUP", "SYNC_GUEST_LEVEL", "SYNC_GROUP_LEVEL", "SYNC_ADMIN_LEVEL"]
+
+    if not set(os.environ).issuperset(needed_vars):
+        raise ValueError("Not all needed variables were set. Please check your .env file and compare it to the template to fix this error!")
 
 def sync(verbosity, dry_run):
     logger = Logger(verbosity)
@@ -42,6 +49,7 @@ def sync(verbosity, dry_run):
 
 def main():
     load_dotenv()
+    check_env_vars()
 
     parser = argparse.ArgumentParser(description="Syncs LDAP group members to GitLab groups")
     parser.add_argument("--dry-run", action="store_true", help="only show changes. don't change anything.")

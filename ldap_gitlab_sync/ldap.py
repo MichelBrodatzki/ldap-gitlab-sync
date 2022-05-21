@@ -2,7 +2,6 @@ import os
 import ldap
 
 def fetch_groups(logger):
-    # TODO: Raise exception if env vars aren't set!
     ldap_conn = ldap.initialize("ldap://{}:{}".format(os.getenv("LDAP_HOST"), os.getenv("LDAP_PORT")))
     ldap_conn.simple_bind_s(os.getenv("LDAP_BIND_DN"), os.getenv("LDAP_BIND_PASSWORD"))
 
