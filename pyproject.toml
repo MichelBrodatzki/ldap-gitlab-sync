@@ -8,11 +8,13 @@ authors = ["Michel Thomas Brodatzki <michel@brodatzki.com>"]
 python = "^3.9"
 python-dotenv = "^0.20.0"
 python-gitlab = "^3.4.0"
+python-ldap = "^3.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 
 [tool.poetry.scripts]
+sync = "ldap_gitlab_sync.sync:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
